@@ -4,6 +4,7 @@
 #include <boost/regex.hpp>
 #include <hello.h>
 #include <string>
+#include <picojson/picojson.h>
 #include <iostream>
 
 using Poco::Timer;
@@ -21,6 +22,20 @@ private:
     Stopwatch _sw;
 };
 
+void picojsontest()
+{
+   const char* json = "{\"a\":1}";
+   picojson::value v;
+   std::string err;
+   const char* json_end = picojson::parse(v, json, json + strlen(json), &err);
+   if(!err.empty())
+   {
+	   std::cerr << err <<std::endl;
+   } 
+   std::cout<<"Json parsed ok! "<<std::endl;
+   return;
+}
+
 int main(int argc, char** argv){
     TimerExample example;
     Timer timer(250, 500);
@@ -34,5 +49,7 @@ int main(int argc, char** argv){
     std::cout << std::boolalpha << boost::regex_match(s, expr) << '\n';
     std::cout << std::boolalpha << boost::regex_match(s2, expr) << '\n';
     hello();
+    picojsontest();
+
     return 0;
 }
