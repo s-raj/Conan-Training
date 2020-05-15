@@ -1,4 +1,4 @@
-conan new hello/0.1
+conan new hello/0.1 -t
 conan create . user/testing
 conan search
 conan search hello/0.1@user/testing
